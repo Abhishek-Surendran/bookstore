@@ -14,8 +14,8 @@ const BookForm = ({ initialData, isEditMode }) => {
     e.preventDefault();
 
     const request = isEditMode
-      ? axios.put(`http://localhost:5656/books/${book._id}`, book)
-      : axios.post('http://localhost:5656/books', book);
+      ? axios.put(`https://bookstore-7za0.onrender.com/books/${book._id}`, book)
+      : axios.post('https://bookstore-7za0.onrender.com/books', book);
 
     request.then(() => {
       navigate('/');

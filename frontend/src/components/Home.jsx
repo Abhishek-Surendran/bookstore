@@ -6,7 +6,7 @@ const Home = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5656/books')
+    axios.get('https://bookstore-7za0.onrender.com/books')
       .then(response => {
         setBooks(response.data);
       })
@@ -16,7 +16,7 @@ const Home = () => {
   }, []);
 
   const deleteBook = (id) => {
-    axios.delete(`http://localhost:5656/books/${id}`)
+    axios.delete(`https://bookstore-7za0.onrender.com/books/${id}`)
       .then(response => {
         setBooks(books.filter(book => book._id !== id));
       })

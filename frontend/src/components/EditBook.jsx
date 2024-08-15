@@ -8,7 +8,7 @@ const EditBook = () => {
   const [book, setBook] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5656/books/${id}`)
+    axios.get(`https://bookstore-7za0.onrender.com/books/${id}`)
       .then(response => {
         setBook(response.data);
       })
