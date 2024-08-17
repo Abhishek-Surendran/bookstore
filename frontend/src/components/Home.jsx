@@ -1,29 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LoadingSpinner';
 
 const Home = () => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get('https://bookstore-7za0.onrender.com/books')
       .then(response => {
         setBooks(response.data);
+        setLoading(false);  // Stop loading when data is fetched
       })
       .catch(error => {
         console.error('There was an error fetching the books!', error);
+        setLoading(false);
       });
   }, []);
 
   const deleteBook = (id) => {
+    setLoading(true);  // Start loading when deleting a book
     axios.delete(`https://bookstore-7za0.onrender.com/books/${id}`)
       .then(response => {
         setBooks(books.filter(book => book._id !== id));
+        setLoading(false);  // Stop loading after deletion
       })
       .catch(error => {
         console.error('There was an error deleting the book!', error);
+        setLoading(false);
       });
   };
+
+  if (loading) {
+    return <LoadingSpinner loading={loading} />;
+  }
 
   return (
     <div>
